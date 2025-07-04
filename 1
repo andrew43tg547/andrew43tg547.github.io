@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ushal eres una perra</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #fce4ec, #f8bbd0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .container, .ticket {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      color: #c2185b;
+      margin-bottom: 1rem;
+    }
+
+    .button {
+      position: relative;
+      height: 60px;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      background: linear-gradient(to right, #eb5a8a, #a99ba0);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: absolute;
+    }
+
+    button:hover {
+      background: #c2185b;
+    }
+
+    .mensaje {
+      margin-top: 20px;
+      color: #6a1b9a;
+      font-size: 1.1rem;
+    }
+
+    .ticket {
+      display: none;
+      background: #fff3f6;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .ticket h1 {
+      color: #d81b60;
+    }
+
+    .ticket p {
+      margin: 0.5rem 0;
+      color: #6a1b9a;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="declaracion">
+    <h1>¿Quieres salir conmigo?</h1>
+    <div class="button">
+      <button style="left: 20%;" onclick="responderSi()">Sí ❤️</button>
+      <button id="btnNo" style="left: 60%;" onclick="responderNo()">No 😢</button>
+    </div>
+    <div class="mensaje" id="mensaje"></div>
+  </div>
+
+  <div class="ticket" id="ticket">
+    <h1>🎟 Cita Confirmada 🎟</h1>
+    <p>¡Prepárate para nuestra cita especial! 🍿🎬</p>
+    <p><strong>Lugar:</strong> Cine</p>
+    <p><strong>Hora:</strong> 08:00 pm</p>
+    <p><strong>¡No faltes! ❤️</strong></p>
+  </div>
+
+  <script>
+    let contador = 0;
+    const btnNo = document.getElementById("btnNo");
+    const mensaje = document.getElementById("mensaje");
+    const declaracion = document.getElementById("declaracion");
+    const ticket = document.getElementById("ticket");
+
+    const respuestas = [
+      "¿Amiga, pa' llantear pe? 🥺",
+      "Ya pues, dime que sí 🥺",
+      "Amiga... llantis llantis pe 😘",
+      "Piénsalo bien, no te vas a arrepentir...",
+      "No te botes pe, anda di que sí 😌",
+      "acepta p puta",
+      "eres una perra si no aceptas"  
+    ];
+
+    // Cuando le da clic a "Sí"
+    function responderSi() {
+      declaracion.style.display = 'none';
+      ticket.style.display = 'block';
+    }
+
+    // Cuando intenta darle clic a "No"
+    function responderNo() {
+      contador++;
+      mensaje.textContent = respuestas[Math.min(contador, respuestas.length - 1)];
+
+      // Mover botón a una posición aleatoria
+      const container = document.querySelector(".button");
+      const maxWidth = container.offsetWidth - btnNo.offsetWidth;
+      const maxHeight = container.offsetHeight - btnNo.offsetHeight;
+
+      const randomX = Math.random() * maxWidth;
+      const randomY = Math.random() * maxHeight;
+
+      btnNo.style.left = `${randomX}px`;
+      btnNo.style.top = `${randomY}px`;
+    }
+  </script>
+
+</body>
+</html>
